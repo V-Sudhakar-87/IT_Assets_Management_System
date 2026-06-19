@@ -2886,3 +2886,72 @@ tbody tr:hover{
     box-shadow:
         0 20px 40px rgba(0,0,0,.12);
 }
+/* Chart Section */
+.chart-card,
+.chart-container{
+    background:#fff;
+    border-radius:20px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.08),
+        0 0 30px rgba(59,130,246,.08);
+
+    transition:.35s;
+}
+
+.chart-card:hover,
+.chart-container:hover{
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.12),
+        0 0 45px rgba(59,130,246,.18);
+}
+
+/* Allocation Section */
+.allocation-container,
+.allocation-card,
+.table-card{
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.08),
+        0 0 25px rgba(59,130,246,.06);
+
+    transition:.35s;
+}
+
+.allocation-container:hover,
+.allocation-card:hover,
+.table-card:hover{
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.12),
+        0 0 40px rgba(59,130,246,.15);
+}
+
+/* Latest Requests */
+.request-card,
+.latest-request-card,
+.recent-card{
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.08),
+        0 0 25px rgba(16,185,129,.08);
+
+    transition:.35s;
+}
+
+.request-card:hover,
+.latest-request-card:hover,
+.recent-card:hover{
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.12),
+        0 0 40px rgba(16,185,129,.18);
+}
+
+/* Icons Glow */
+.card-icon{
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.15),
+        0 0 20px rgba(59,130,246,.25);
+}
