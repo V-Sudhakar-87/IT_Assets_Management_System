@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/server/client/css/admin.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Sidebar -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="logo">
+                <i class="fa-solid fa-laptop"></i>
+                <span>IT Asset</span>
+                <p style="font-size: 12px;">
+                    IT Asset Management Dashboard
+                </p>
+            </div>
+
+            <ul>
+
+                <li class=" menu-item active" onclick="showDashboard(this)">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </li>
+
+                <li class="menu-item" onclick="showEmployees(this)">
+                 <i class="fa-solid fa-users"></i>
+                 Employees
+                </li>
+
+                <li class="menu-item"  onclick="showAssets(this)">
+                    <i class="fa-solid fa-computer"></i>
+                    Assets
+                </li>
+
+                <li class="menu-item" onclick="showAllocation(this)" id="asset-menu">
+                    <i class="fa-solid fa-box"></i>
+                    Asset Allocation
+                </li>
+
+                <li onclick="showMaintenance(this)" class="menu-item">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    Maintenance
+                </li>
+
+                <li onclick="showReports(this)" class="menu-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Reports
+                </li>
+
+                <li onclick="showSettings(this)" class="menu-item">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </li>
+
+                <li onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </li>
+
+            </ul>
+
+        </aside>
+
+        <!-- Main Content -->
+
+        <main class="main-content">
+
+            <!-- Header -->
+
+            <header>
+
+                <div class="menu-btn"
+                     onclick="toggleSidebar()">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </div>
+
+                <h2>Dashboard</h2>
+                
+                <div class="profile">
+                    <div class="notification-box"
+onclick="openNotificationModal()">
+
+    <i class="fa-solid fa-bell"></i>
+
+    <span id="requestBadge">
+
+        0
+
+    </span>
+
+</div>
+                
+                    <div class="avatar" onclick="openSettingsFromProfile()" style="cursor: pointer;">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <span id="adminName">Admin</span>
+
+                </div>
+
+            </header>
+
+            <!-- Page Content -->
+<div id="dashboardPage">
+            <div class="dashboard-top" >
+
+    <h1 id="welcomeText">
+        Welcome Admin 👋
+    </h1>
+
+    <div class="date-box">
+
+        <div class="date-content">
+
+            <span id="dayName">
+                Monday
+            </span>
+
+            <span id="dateText">
+                Jun 16, 2026
+            </span>
+
+        </div>
+
+        <i class="fa-regular fa-calendar-days"></i>
+
+    </div>
+
+</div>
+<div class="dashboard-body" >
+      <div class="stats-cards">
+
+    <div class="card blue">
+
+        <div class="card-icon">
+            <i class="fa-solid fa-computer"></i>
+        </div>
+
+        <div class="card-info">
+            <h4>Total Assets</h4>
+            <h2 id="totalAssets">0</h2>
+            <p onclick="openAssetFromDashboard()">View all assets →</p>
+        </div>
+
+    </div>
+
+    <div class="card green">
+
+        <div class="card-icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <div class="card-info">
+            <h4>Total Employees</h4>
+            <h2 id="totalEmployees">0</h2>
+            <p onclick="openEmployeeFromDashboard()">View details →</p>
+        </div>
+
+    </div>
+
+    <div class="card orange">
+
+        <div class="card-icon">
+            <i class="fa-solid fa-box"></i>
+        </div>
+
+        <div class="card-info">
+            <h4>Allocated Assets</h4>
+            <h2 id="allocatedAssets">0</h2>
+            <p onclick="openAssetPage()">View details →</p>
+        </div>
+
+    </div>
+
+    <div class="card red">
+
+        <div class="card-icon">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+
+        <div class="card-info">
+            <h4>Maintenance</h4>
+            <h2 id="maintenanceCount">0</h2>
+            <p onclick="viewMaintenanceDetails()">View details →</p>
+        </div>
+
+    </div>
+
+</div>  
+<div class="chart-section" >
+
+    <!-- Left Chart -->
+
+    <div class="chart-card" >
+
+        <h3>Assets by Category</h3>
+
+        <canvas id="assetChart"></canvas>
+
+    </div>
+
+    <!-- Right Chart -->
+
+    <div class="chart-card">
+
+        <h3>Allocation Overview</h3>
+
+        <canvas id="allocationChart"></canvas>
+
+    </div>
+
+</div>   
+
+<div class="bottom-section">
+
+    
+    <div class="table-card">
+
+    <div class="card-header">
+
+        <h3>Recent Allocations</h3>
+
+        <a href="#"
+           onclick="openAssetPage()">
+
+           View All
+
+        </a>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Assets</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="recentAllocationTable">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+    <!-- Maintenance -->
+
+    <div class="table-card">
+
+        <div class="card-header">
+
+            <h3>Latest Maintenance Requests</h3>
+
+            <a href="#"
+   onclick="openNotificationModal()">
+
+   View All
+
+</a>
+
+        </div>
+
+       <table>
+
+    <thead>
+
+        <tr>
+
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Asset ID</th>
+            <th>Priority</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody id="recentRequestTable">
+
+    </tbody>
+
+</table>
+    </div> 
+
+</div>
+<!-- Allocation Modal -->
+
+<div id="allocationModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>All Allocations</h2>
+
+            <button onclick="closeAllocationModal()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="modal-table">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Asset ID</th>
+                        <th>Asset Name</th>
+                        <th>Employee</th>
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="allocationFullTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Maintenance Modal -->
+
+<div id="maintenanceModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>All Maintenance Requests</h2>
+
+            <button onclick="closeMaintenanceModal()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="modal-table">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Request ID</th>
+
+                        <th>Asset ID</th>
+
+                        <th>Issue</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="maintenanceFullTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+            </div>
+
+ <div id="employeePage" style="display:none;">
+   <div class="employee-container">
+
+    <div class="employee-header">
+
+        <h1>Employees</h1>
+         <div class="search-section">
+
+        <input type="text"
+               id="searchEmployee"
+               placeholder="Search Employee">
+
+    </div>
+        <button onclick="openEmployeeModal()"
+                class="add-btn">
+
+            + Add Employee
+
+        </button>
+
+    </div>
+
+    
+
+    <div class="employee-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Join Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="employeeTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<div id="employeeModal" class="modal">
+
+    <div class="employee-modal-content">
+
+        <div class="modal-header">
+
+            <h2>Add Employee</h2>
+
+            <button onclick="closeEmployeeModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <div class="employee-form">
+
+            <div class="form-group">
+                <label>Employee ID</label>
+                <input type="text"
+                       id="empId"
+                       placeholder="EMP001">
+            </div>
+
+            <div class="form-group">
+                <label>Employee Name</label>
+                <input type="text"
+                       id="empName"
+                       placeholder="Enter employee name">
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email"
+                       id="empEmail"
+                       placeholder="employee@gmail.com">
+            </div>
+
+            <div class="form-group">
+                <label>Login Password</label>
+                <input type="password"
+                       id="empPassword"
+                       placeholder="********">
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label>Role</label>
+
+                    <select id="empRole">
+
+                        <option value="employee">
+                            Employee
+                        </option>
+
+                        <option value="manager">
+                            Manager
+                        </option>
+
+                        <option value="teamlead">
+                            Team Lead
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+
+                    <select id="empStatus">
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Inactive">
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label>Join Date</label>
+
+                <input type="date"
+                       id="joinDate">
+            </div>
+
+            <button class="save-btn"
+                    onclick="addEmployee()">
+
+                Save Employee
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="actionModal" class="modal">
+
+    <div class="employee-modal-content action-modal">
+
+    <h2>Choose Action</h2>
+
+    <p>Select an action for this employee</p>
+
+    <div class="action-buttons">
+
+        <button class="edit-action-btn"
+                onclick="editEmployee()">
+
+            <i class="fa-solid fa-pen"></i>
+            Edit Employee
+
+        </button>
+
+        <button class="delete-action-btn"
+                onclick="confirmDeleteEmployee()">
+
+            <i class="fa-solid fa-trash"></i>
+            Delete Employee
+
+        </button>
+
+        <button class="cancel-action-btn"
+                onclick="closeActionModal()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+</div>
+<div id="assetsPage" style="display:none;">
+
+    <div class="asset-header">
+
+        <h1 style="font-size: 20px;">Assets Management</h1>
+         <div class="search-section">
+
+        <input type="text"
+               id="searchAsset"
+               placeholder="Search Asset">
+
+    </div>
+        <button class="add-btn"
+                onclick="openAssetModal()">
+
+            + Add Asset
+
+        </button>
+
+    </div>
+
+    <div class="asset-cards">
+
+        <div class="asset-card laptop-card"
+             onclick="openAssetCategory('Laptop')">
+
+            <i class="fa-solid fa-laptop"></i>
+
+            <h3>Laptops</h3>
+
+            <h2 id="laptopCount">0</h2>
+
+        </div>
+
+        <div class="asset-card monitor-card"
+             onclick="openAssetCategory('Monitor')">
+
+            <i class="fa-solid fa-desktop"></i>
+
+            <h3>Monitors</h3>
+
+            <h2 id="monitorCount">0</h2>
+
+        </div>
+
+        <div class="asset-card printer-card"
+             onclick="openAssetCategory('Printer')">
+
+            <i class="fa-solid fa-print"></i>
+
+            <h3>Printers</h3>
+
+            <h2 id="printerCount">0</h2>
+
+        </div>
+
+        <div class="asset-card network-card"
+             onclick="openAssetCategory('Network')">
+
+            <i class="fa-solid fa-wifi"></i>
+
+            <h3>Network Devices</h3>
+
+            <h2 id="networkCount">0</h2>
+
+        </div>
+
+    </div>
+    <div class="employee-table">
+
+    <div class="card-header">
+
+        <h3 id="assetTableTitle">
+
+            Assets
+
+        </h3>
+
+    </div>
+<div class="asset-table-container">
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Asset ID</th>
+
+                <th>Category</th>
+
+                <th>Brand</th>
+
+                <th>Model</th>
+
+                <th>Status</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="assetTable">
+
+        </tbody>
+
+    </table>
+</div>
+</div>
+    <!-- Asset Modal -->
+
+<div id="assetModal" class="modal">
+
+    <div class="employee-modal-content">
+
+        <div class="modal-header">
+
+            <h2>Add Asset</h2>
+
+            <button onclick="closeAssetModal()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div class="employee-form">
+
+            <div class="form-group">
+
+                <label>Asset ID</label>
+
+                <input type="text"
+                       id="assetId"
+                       placeholder="AST001">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Category</label>
+
+                <select id="assetCategory">
+
+                    <option value="Laptop">
+                        Laptop
+                    </option>
+
+                    <option value="Monitor">
+                        Monitor
+                    </option>
+
+                    <option value="Printer">
+                        Printer
+                    </option>
+
+                    <option value="Network">
+                        Network Device
+                    </option>
+                    <option value="others">Others</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Brand</label>
+
+                <input type="text"
+                       id="assetBrand"
+                       placeholder="Dell">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Model</label>
+
+                <input type="text"
+                       id="assetModel"
+                       placeholder="Vostro 3520">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Serial Number</label>
+
+                <input type="text"
+                       id="serialNumber"
+                       placeholder="DELL123456">
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>Purchase Date</label>
+
+                    <input type="date"
+                           id="purchaseDate">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Warranty Expiry</label>
+
+                    <input type="date"
+                           id="warrantyExpiry">
+
+                </div>
+
+            </div>
+
+            <button class="save-btn"
+                    onclick="addAsset()">
+
+                Save Asset
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+</div>
+    <div id="assetActionModal" class="modal">
+
+    <div class="employee-modal-content action-modal">
+
+        <h2>Choose Action</h2>
+
+        <p>Select an action for this asset</p>
+
+        <div class="action-buttons">
+
+            <button class="edit-action-btn"
+                    onclick="editAsset()">
+
+                <i class="fa-solid fa-pen"></i>
+                Edit Asset
+
+            </button>
+
+            <button class="delete-action-btn"
+                    onclick="confirmDeleteAsset()">
+
+                <i class="fa-solid fa-trash"></i>
+                Delete Asset
+
+            </button>
+
+            <button class="cancel-action-btn"
+                    onclick="closeAssetActionModal()">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div id="allocationPage" style="display:none;">
+
+   <div class="allocation-header">
+
+    <h1>Asset Allocation</h1>
+
+    <div class="search-section">
+
+        <input type="text"
+               id="searchAllocation"
+               placeholder="Search User ID, Name, Role..."
+onkeyup="searchAllocations()">
+
+    </div>
+
+    <button class="add-btn"
+            onclick="openAllocationForm()">
+
+        + Allocate Asset
+
+    </button>
+
+</div>
+    <div class="employee-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Total Assets</th>
+                    <th>Working</th>
+                    <th>Maintenance</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="allocationTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <div id="allocationFormModal" class="modal">
+
+    <div class="employee-modal-content">
+
+        <div class="modal-header">
+
+            <h2>Allocate Asset</h2>
+
+            <button onclick="closeAllocationForm()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="employee-form">
+
+            <div class="form-group">
+
+                <label>User ID</label>
+
+                <input type="text"
+                       id="allocationUserId">
+
+            </div>
+
+            <div class="form-group">
+
+    <label>Allocated Date</label>
+
+    <input
+    type="date"
+    id="allocatedDate">
+
+</div>
+
+            <div id="assetContainer">
+
+                <div class="asset-row">
+
+                    <div class="form-group">
+
+                        <label>Category</label>
+
+                        <select class="asset-category" onchange="loadAvailableAssets(this)">
+
+                            <option>Laptop</option>
+                            <option>Monitor</option>
+                            <option>Printer</option>
+                            <option>Network</option>
+                            <option>Others</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Asset ID</label>
+
+                        <select class="asset-id">
+
+                         <option>
+                          Select Asset
+                         </option>
+
+                        </select>
+
+                    </div>
+                    <button
+    type="button"
+    class="remove-asset-btn"
+    onclick="removeAssetRow(this)">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+                </div>
+
+            </div>
+
+            <button type="button"
+                    class="add-btn"
+                    onclick="addMoreAssetRow()">
+
+                + Add More Asset
+
+            </button>
+
+            <button class="save-btn" onclick="saveAllocation()">
+
+                Save Allocation
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="allocationDetailsModal"
+class="modal">
+
+<div class="modal-content allocation-details">
+
+<button
+class="close-btn"
+onclick="closeAllocationDetails()">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<h2>Allocation Details</h2>
+
+<div id="allocationDetailsContent">
+
+</div>
+
+<div class="allocation-actions">
+
+<button
+class="edit-btn" onclick="editAllocation()">
+<i class="fa-solid fa-pen"></i>
+Edit
+
+</button>
+
+<button
+class="delete-btn" onclick="deleteAllocation()">
+<i class="fa-solid fa-trash"></i>
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div id="reportsPage" style="display:none;">
+
+    <div class="report-header">
+
+        <h1>Reports</h1>
+
+        <div class="report-filters">
+
+            <input
+            type="date"
+            id="fromDate">
+
+            <input
+            type="date"
+            id="toDate">
+
+            <button
+            class="generate-btn"
+            onclick="generateReport()">
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="report-summary">
+
+        <div class="report-card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h4>Total Allocations</h4>
+
+            <h2 id="reportTotalAllocations">
+                0
+            </h2>
+
+        </div>
+
+        <div class="report-card">
+
+            <h4>Total Assets</h4>
+
+            <h2 id="reportTotalAssets">
+                0
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="chart-card">
+
+        <canvas id="reportChart">
+
+        </canvas>
+
+    </div>
+
+    <div class="employee-table">
+    
+        <table>
+             
+            <thead>
+
+                <tr>
+
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Total Assets</th>
+                    <th>Date</th>
+
+                </tr>  
+                <button
+class="download-btn"
+onclick="downloadReportPDF()">
+
+<i class="fa-solid fa-file-pdf"></i>
+Download PDF
+
+</button>
+
+            </thead>
+
+            <tbody id="reportTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<div id="settingsPage" style="display:none;">
+
+    <div class="settings-header">
+
+        <h1>Settings</h1>
+
+    </div>
+
+    <div class="profile-card">
+
+        <div class="profile-avatar">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+        <h2 id="adminProfileName">
+            Admin Name
+        </h2>
+
+        <p
+        class="role"
+        id="adminProfileRole">
+
+            Administrator
+
+        </p>
+
+        <div class="profile-info">
+
+            <div class="info-box">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <span
+                id="adminProfileEmail">
+
+                </span>
+
+            </div>
+
+            <div class="info-box">
+
+                <i class="fa-solid fa-shield"></i>
+
+                <span
+                id="adminProfileRole2">
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="admin-badge">
+
+            <i class="fa-solid fa-crown"></i>
+
+            Administrator Access
+
+        </div>
+
+        <button
+        class="edit-profile-btn"
+        onclick="openProfileModal()">
+
+            <i class="fa-solid fa-pen"></i>
+
+            Edit Profile
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+
+<div
+id="profileModal"
+class="modal">
+
+    <div class="modal-content settings-modal">
+
+       
+
+        <h2>Edit Profile</h2>
+         <button
+        class="close-btn"
+        onclick="closeProfileModal()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div class="form-group">
+
+            <label>Name</label>
+
+            <input
+            type="text"
+            id="editName">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Email</label>
+
+            <input
+            type="email"
+            id="editEmail">
+
+        </div>
+
+        <hr style="margin-top: 10px;">
+
+        <h3>Password Change</h3>
+
+        <div class="form-group">
+
+            <label>Old Password</label>
+
+            <input
+            type="password"
+            id="oldPassword">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>New Password</label>
+
+            <input
+            type="password"
+            id="newPassword">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Secret Key</label>
+
+            <input
+            type="password"
+            id="secretKey">
+
+        </div>
+
+        <button
+        class="save-btn"
+        onclick="updateProfile()">
+
+            Save Changes
+
+        </button>
+
+    </div>
+
+</div>
+<div id="maintenancePage"
+     style="display:none;">
+
+    <div class="employee-header">
+
+        <h1>
+            Maintenance Requests
+        </h1>
+        <div class="maintenance-top-bar">
+
+    <input
+    type="text"
+    id="maintenanceSearch"
+    placeholder="Search Request ID..."
+    onkeyup="searchMaintenance()">
+
+</div>
+
+    </div>
+
+    <div class="employee-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee</th>
+                    <th>Asset</th>
+                    <th>Reason</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                    <th>Action</th>
+ 
+                </tr>
+
+            </thead>
+
+            <tbody id="maintenanceTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<div id="maintenanceActionModal"
+     class="modal">
+
+    <div class="employee-modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+                Update Request
+            </h2>
+
+            <button
+            onclick="closeMaintenanceModal2()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <input
+        type="hidden"
+        id="requestId">
+
+        <div class="form-group">
+
+            <label>
+                Admin Reply
+            </label>
+
+            <textarea
+            id="adminReply"
+            rows="4"></textarea>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Status
+            </label>
+
+            <select id="requestStatus">
+
+                <option>
+                    Pending
+                </option>
+
+                <option>
+                    In Progress
+                </option>
+
+                <option>
+                    Maintenance
+                </option>
+
+                <option>
+                    Resolved
+                </option>
+
+                <option>
+                    Rejected
+                </option>
+
+            </select>
+
+        </div>
+
+        <button
+        class="save-btn"
+        onclick="updateRequest()">
+
+            Update Request
+
+        </button>
+
+    </div>
+
+</div>
+<div id="notificationModal"
+class="modal">
+
+    <div class="notification-modal">
+
+        <div class="modal-header">
+
+            <h2>
+                New Requests
+            </h2>
+
+            <button
+            onclick="closeNotificationModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+      <div class="notification-table-wrapper">
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Employee ID</th>
+
+                    <th>Name</th>
+
+                    <th>Asset</th>
+
+                    <th>Priority</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="notificationTable">
+
+            </tbody>
+
+        </table>
+      </div>
+    </div>
+
+</div>
+        </main>
+
+    </div>
+    
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="/server/client/js/admin.js"></script>
+    
+
+
+</body>
+
+</html>

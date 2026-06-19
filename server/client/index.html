@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Asset Management</title>
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/server/client/css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-box form-panel visible" id="signin-form">
+
+            <div class="logo">
+                <i class="fa-solid fa-laptop"></i>
+            </div>
+
+            <h2>IT Asset Management System</h2>
+
+            <p>Please sign in to continue</p>
+
+            <div class="input-group">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email address">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" placeholder="Password">
+            </div>
+
+           
+
+            <div class="options">
+                <label>
+                    <input type="checkbox">
+                    Remember me
+                </label>
+
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button onclick="login()">
+                Sign In
+            </button>
+          <p class="toggle-link">
+
+    Don't have admin access?
+
+    <a href="#" onclick="showSignup()" style="text-decoration: none;">
+        Create Admin Account
+    </a>
+
+</p>
+            <p id="message"></p>
+
+            <div class="footer">
+                © 2026 IT Asset Management System
+            </div>
+
+        </div>
+         <div class="login-box form-panel visible" id="signup-form" style="display:none;">
+
+    <div class="logo">
+        <i class="fa-solid fa-user-plus"></i>
+    </div>
+
+    <h2>Create Admin Account</h2>
+
+    <div class="input-group">
+        <input type="text"
+               id="signupName"
+               placeholder="Full Name">
+    </div>
+
+    <div class="input-group">
+        <input type="email"
+               id="signupEmail"
+               placeholder="Email">
+    </div>
+
+    <div class="input-group">
+        <input type="password"
+               id="signupPassword"
+               placeholder="Password">
+    </div>
+
+    <div class="input-group">
+        <input type="password"
+               id="confirmPassword"
+               placeholder="Confirm Password">
+    </div>
+
+    <div class="input-group">
+        <input type="text"
+               id="secretKey"
+               placeholder="Secret Key">
+    </div>
+
+    <button onclick="signup()">
+        Create Admin
+    </button>
+
+    <p class="toggle-link">
+        <a href="#" onclick="showSignin(event)">
+            Back To Login
+        </a>
+    </p>
+
+</div>
+        <div class="right-image">
+            <img src="/server/client/image/login logo.png" alt="">
+        </div>
+        
+
+    </div>
+   
+
+    <script src="/server/client/js/login.js"></script>
+
+</body>
+
+</html>

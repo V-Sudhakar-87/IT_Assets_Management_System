@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Employee Dashboard
+    </title>
+
+    <link rel="stylesheet"
+        href="/server/client/css/employee.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="employee-container">
+
+        <!-- Sidebar -->
+
+        <aside class="sidebar">
+
+            <div class="logo">
+
+                <h2>
+                    IT Asset
+                </h2>
+
+            </div>
+
+            <ul class="sidebar-menu">
+
+                <li
+                    class="active"
+                    onclick="showDashboard(this)">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </li>
+
+                <li
+                    onclick="showAssets(this)">
+
+                    <i class="fa-solid fa-laptop"></i>
+
+                    My Assets
+
+                </li>
+
+                <li
+                    onclick="showRequests(this)">
+
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                    My Requests
+
+                </li>
+
+                <li
+                    onclick="showProfile(this)">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Profile
+
+                </li>
+
+                <li
+                    onclick="logout()">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </li>
+
+            </ul>
+            
+
+        </aside>
+      <div
+id="sidebarOverlay"
+class="sidebar-overlay"
+onclick="closeSidebar()">
+
+</div>
+        <!-- Main Content -->
+
+        <div class="main-content">
+
+            <!-- Header -->
+
+            <header class="header">
+                 <button
+        class="menu-btn"
+        onclick="toggleSidebar()">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+                <div class="welcome">
+
+                    <h2>
+
+                        Welcome,
+
+                        <span id="employeeName">
+
+                            Employee
+
+                        </span>
+
+                    </h2>
+
+                    <p>
+
+                        Manage your assets and requests
+
+                    </p>
+
+                </div>
+
+                <div class="profile-section">
+
+                    <div
+                        class="profile-icon"
+                        onclick="showProfile()">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- Dashboard Page -->
+
+            <section
+id="dashboardPage"
+class="page">
+
+    <div class="dashboard-grid">
+
+        <!-- Assigned Assets -->
+
+        <div class="assigned-assets-card">
+
+            <div class="card-header">
+
+                <h3>
+                    My Assigned Assets
+                </h3>
+
+            </div>
+           <div class="assigned-assets-scroll">
+            <table class="table-scroll">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Asset ID</th>
+
+                        <th>Category</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                id="assignedAssetsTable">
+
+                </tbody>
+
+            </table>
+         </div>
+        </div>
+
+        <!-- Raise Request -->
+
+        <div class="raise-request-card">
+
+            <h3>
+                Raise Maintenance Request
+            </h3>
+
+            <p>
+                Facing an issue with your asset?
+            </p>
+
+            <button
+            class="raise-btn" onclick="openRequestModal()">
+
+                Raise New Request
+
+            </button>
+
+        </div>
+
+       
+
+        <!-- Requests -->
+
+        <div class="request-card">
+
+            <div class="card-header">
+
+                <h3>
+
+                    My Maintenance Requests
+
+                </h3>
+
+            </div>
+          <div class="request-scroll">
+            <table class="table-scroll" >
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Reason</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                id="requestTable">
+
+                </tbody>
+
+            </table>
+         </div>
+        </div>
+         <!-- Note Card -->
+
+        <div class="note-card">
+
+            <h4>
+
+                Note
+
+            </h4>
+
+            <p>
+
+                If you face any issue with assigned assets,
+                please raise a maintenance request.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+            <!-- Assets Page -->
+
+            <section
+                id="assetsPage"
+                class="page"
+                style="display:none;">
+
+                <div class="page-header">
+
+                    <h2>
+
+                        My Assets
+
+                    </h2>
+
+                </div>
+
+                <div
+                    id="assetsContainer" class="assets-grid">
+
+                </div>
+
+            </section>
+
+            <!-- Requests Page -->
+
+            <section
+                id="requestsPage"
+                class="page"
+                style="display:none;">
+
+                <div class="page-header">
+
+                    <h2>
+
+                        My Requests
+
+                    </h2>
+
+                </div>
+
+                <button
+                    class="raise-request-btn" onclick="openRequestModal()">
+
+                    + Raise Request
+
+                </button>
+
+                <div class="table-card">
+                  <div class="request-table-scroll">
+                    <table class="request-page-table">
+
+                        <thead>
+
+                             <tr>
+
+                    <th>Asset</th>
+
+                    <th>Reason</th>
+
+                    <th>Priority</th>
+
+                    <th>Status</th>
+
+                    <th>Admin Reply</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+                        </thead>
+
+                        <tbody
+                            id="requestPageTable">
+
+                        </tbody>
+
+                    </table>
+                   </div>
+                </div>
+
+            </section>
+
+            <!-- Profile Page -->
+
+           <div id="profilePage"
+class="page"
+style="display:none;">
+
+    <div class="profile-card">
+
+        <div class="profile-avatar">
+
+            <i class="fa-solid fa-user"></i>
+          
+        </div>
+       <div class="profile-badge">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    Active Employee
+
+</div>
+
+        <h2 id="profileName">
+
+        </h2>
+
+        <p id="profileRole">
+
+        </p>
+
+        <div class="profile-details">
+
+            <div class="detail-row">
+
+                <span>
+                    Employee ID
+                </span>
+
+                <strong
+                id="profileEmployeeId">
+
+                </strong>
+
+            </div>
+
+            <div class="detail-row">
+
+                <span>
+                    Email
+                </span>
+
+                <strong
+                id="profileEmail">
+
+                </strong>
+
+            </div>
+
+            <div class="detail-row">
+
+                <span>
+                    Role
+                </span>
+
+                <strong
+                id="profileRoleText">
+
+                </strong>
+
+            </div>
+
+            <div class="detail-row">
+
+                <span>
+                    Joined Date
+                </span>
+
+                <strong
+                id="profileJoinDate">
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <button
+        class="edit-profile-btn"
+        onclick="openPasswordModal()">
+
+            Change Password
+
+        </button>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+<div
+id="assetDetailsModal"
+class="modal">
+
+    <div class="modal-content asset-details-modal">
+
+       
+        <button
+            class="close-btn"
+            onclick="closeAssetDetails()" style="width: 0;color: black;background-color: white; height: 0;">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        <div id="assetDetailsContent">
+
+        </div>
+
+    </div>
+
+</div>
+<div
+id="passwordModal"
+class="modal">
+
+    <div
+    class="modal-content">
+
+        <h2>
+
+            Change Password
+
+        </h2>
+        
+
+        <input
+        type="password"
+        id="oldPassword"
+        placeholder="Old Password">
+
+        <input
+        type="password"
+        id="newPassword"
+        placeholder="New Password">
+
+        <button
+        onclick="changePassword()">
+
+            Update Password
+
+        </button>
+        <button
+class="close-btn"
+onclick="closePasswordModal()" style="margin-top: 20px; height: 50px;">
+
+    cancel
+
+</button>
+
+    </div>
+
+</div>
+<div id="requestModal" class="modal">
+
+    <div class="request-modal">
+
+        <div class="modal-header">
+
+            <h2>
+                Raise Maintenance Request
+            </h2>
+
+            <button
+            class="close-btn"
+            onclick="closeRequestModal()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div class="request-form">
+
+            <div class="form-group">
+
+                <label>
+                    Employee ID
+                </label>
+
+                <input
+                type="text"
+                id="requestEmployeeId"
+                readonly>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Employee Name
+                </label>
+
+                <input
+                type="text"
+                id="requestEmployeeName"
+                readonly>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Select Asset
+                </label>
+
+                <select
+                id="requestAsset">
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Reason
+                </label>
+
+                <textarea
+                id="requestReason"
+                rows="4"
+                placeholder=
+                "Describe the issue">
+
+                </textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Priority
+                </label>
+
+                <select
+                id="requestPriority">
+
+                    <option>
+                        Low
+                    </option>
+
+                    <option>
+                        Medium
+                    </option>
+
+                    <option>
+                        High
+                    </option>
+
+                    <option>
+                        Critical
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+            class="submit-request-btn"
+            onclick="submitRequest()">
+
+                Submit Request
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+    <script src="/server/client/js/employee.js"></script>
+
+</body>
+
+</html>

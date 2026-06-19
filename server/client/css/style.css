@@ -1,0 +1,183 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:white;
+    min-height:100vh;
+}
+
+.login-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.login-box{
+    width:450px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.logo{
+    width:80px;
+    height:80px;
+    margin:auto;
+    border-radius:50%;
+    background:#0d6efd;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+}
+
+h2{
+    text-align:center;
+    margin-top:20px;
+    color:#1e293b;
+}
+
+.login-box p{
+    text-align:center;
+    color:#777;
+    margin-top:10px;
+}
+
+.input-group{
+    margin-top:20px;
+    position:relative;
+}
+
+.input-group i{
+    position:absolute;
+    top:16px;
+    left:15px;
+    color:#888;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px 14px 14px 45px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+}
+
+select{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.options{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+    font-size:14px;
+}
+
+.options a{
+    color:#0d6efd;
+    text-decoration:none;
+}
+
+button{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#0d6efd;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0b5ed7;
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+    color:#888;
+    font-size:13px;
+}
+
+.right-image{
+    margin-left:50px;
+}
+
+.right-image img{
+    width:550px;
+    top: 20px;
+}
+
+#message{
+    margin-top:15px;
+    font-weight:600;
+}
+.signup-link{
+    margin-top:15px;
+    text-align:center;
+    font-size:14px;
+}
+
+.signup-link a{
+    color:#0d6efd;
+    text-decoration:none;
+    font-weight:600;
+}
+.form-panel{
+    transition: all .4s ease-in-out;
+}
+
+#signin-form,
+#signup-form{
+    width:450px;
+}
+.login-box{
+    animation:fadeIn .4s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+/* Mobile */
+
+@media(max-width:768px){
+
+    .login-container{
+        flex-direction:column;
+    }
+
+    .right-image{
+        display:none;
+    }
+
+    .login-box{
+        width:100%;
+        max-width:400px;
+    }
+
+}
