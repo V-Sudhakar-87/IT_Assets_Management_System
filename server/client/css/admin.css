@@ -2854,3 +2854,35 @@ tbody tr:hover{
     overflow-x:auto;
 
 }
+
+.card{
+    background:linear-gradient(145deg,#ffffff,#f1f5f9);
+    border-radius:20px;
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08),
+        0 2px 8px rgba(0,0,0,.05);
+    transition:.35s ease;
+    border:1px solid rgba(255,255,255,.6);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:
+        0 20px 35px rgba(0,0,0,.12),
+        0 8px 15px rgba(0,0,0,.08);
+}
+
+.card-icon{
+    box-shadow:
+        0 10px 20px rgba(0,0,0,.15);
+}
+#assetChart{
+    filter:
+        drop-shadow(0 8px 12px rgba(0,0,0,.15));
+}
+.chart-card{
+    background:#fff;
+    border-radius:20px;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.12);
+}
