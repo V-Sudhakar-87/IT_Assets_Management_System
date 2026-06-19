@@ -1299,13 +1299,13 @@ document.getElementById("assetChart"),
                 othersCount
             ],
 
-            backgroundColor:[
-                "#8da7e4",
-                "#eecd87",
-                "#ba98f5",
-                "#ffadbe",
-                "#9e9e9e"
-            ]
+           backgroundColor: [
+    "#4338CA",
+    "#0891B2",
+    "#059669",
+    "#D97706",
+    "#475569"
+]
         }]
     },
 
