@@ -27,7 +27,14 @@ html{
 .sidebar{
     width:260px;
     min-height:100vh;
-    background:#081c4b;
+    
+     background:linear-gradient(
+        180deg,
+        #312E81,
+        #4338CA,
+        #6366F1
+    );
+
     color:white;
     transition:.3s;
 }
