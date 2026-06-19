@@ -1300,11 +1300,11 @@ document.getElementById("assetChart"),
             ],
 
             backgroundColor:[
-                "#2563eb",
-                "#22c55e",
-                "#f59e0b",
-                "#ef4444",
-                "#6b7280"
+                "#0F172A",
+                "#CA8A04",
+                "#7C3AED",
+                "#FF1744",
+                "#2979FF"
             ]
         }]
     },
