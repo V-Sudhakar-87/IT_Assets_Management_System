@@ -56,7 +56,7 @@ html{
 .logo i{
     margin-right:10px;
 }
-/*
+
 .sidebar ul{
     list-style:none;
     padding:20px;
@@ -69,7 +69,7 @@ html{
     cursor:pointer;
     transition:.3s;
 }
-
+/*
 .sidebar ul li:hover{
     background:#0d6efd;
 }
