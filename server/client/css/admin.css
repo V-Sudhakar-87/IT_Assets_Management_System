@@ -2868,3 +2868,74 @@ tbody tr:hover{
     overflow-x:auto;
 
 }
+/* ===== THEME OVERRIDE ===== */
+
+:root{
+    --primary:#C56A00;
+    --primary-dark:#A85400;
+    --primary-light:#E8891A;
+}
+
+/* Buttons */
+.add-btn,
+.save-btn,
+.action-btn,
+.edit-action-btn,
+.back-btn,
+.generate-btn{
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-light)
+    ) !important;
+}
+
+.add-btn:hover,
+.save-btn:hover,
+.action-btn:hover,
+.edit-action-btn:hover,
+.back-btn:hover,
+.generate-btn:hover{
+    background:var(--primary-dark) !important;
+}
+
+/* Avatar */
+.avatar,
+.profile-avatar{
+    background:var(--primary) !important;
+}
+
+/* Card Icons */
+.blue .card-icon{
+    background:#C56A00 !important;
+}
+
+/* Links */
+.card-info p,
+.card-header a{
+    color:var(--primary) !important;
+}
+
+/* Input Focus */
+.form-group input:focus,
+.form-group select:focus,
+.report-filters input:focus{
+    border-color:var(--primary) !important;
+    box-shadow:0 0 0 4px rgba(197,106,0,.15) !important;
+}
+
+/* Search Focus */
+#maintenanceSearch:focus{
+    border-color:var(--primary) !important;
+    box-shadow:0 0 0 4px rgba(197,106,0,.15) !important;
+}
+
+/* Report Cards */
+.report-card::before{
+    background:var(--primary) !important;
+}
+
+/* Scrollbar */
+#reportsPage::-webkit-scrollbar-thumb{
+    background:var(--primary) !important;
+}
