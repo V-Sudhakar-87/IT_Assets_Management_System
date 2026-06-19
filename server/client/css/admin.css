@@ -30,9 +30,9 @@ html{
     
      background:linear-gradient(
         180deg,
-        #312E81,
-        #4338CA,
-        #6366F1
+        #111827 0%,
+        #1E293B 50%,
+        #334155 100%
     );
 
     color:white;

@@ -186,7 +186,7 @@ async function loadAllocationChart(){
                 data:
                 data.monthlyData,
 
-                borderColor:"#2563eb",
+                borderColor:"#ff0000",
 
                 backgroundColor:
                 "rgba(37,99,235,0.1)",
