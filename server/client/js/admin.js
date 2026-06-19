@@ -186,7 +186,7 @@ async function loadAllocationChart(){
                 data:
                 data.monthlyData,
 
-                borderColor:"#ff0000",
+                borderColor:"#2563eb",
 
                 backgroundColor:
                 "rgba(37,99,235,0.1)",
@@ -1299,13 +1299,13 @@ document.getElementById("assetChart"),
                 othersCount
             ],
 
-           backgroundColor: [
-    "#4338CA",
-    "#0891B2",
-    "#059669",
-    "#D97706",
-    "#475569"
-]
+            backgroundColor:[
+                "#2563eb",
+                "#22c55e",
+                "#f59e0b",
+                "#ef4444",
+                "#6b7280"
+            ]
         }]
     },
 
