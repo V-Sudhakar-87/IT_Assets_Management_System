@@ -30,15 +30,22 @@ html{
     
      background:linear-gradient(
         180deg,
-        #111827 0%,
-        #1E293B 50%,
-        #334155 100%
+        #3B1D0A,
+        #7C3F00,
+        #C56A00
     );
 
     color:white;
     transition:.3s;
 }
+.sidebar ul li:hover{
+    background:rgba(255,255,255,.12);
+}
 
+.active{
+    background:rgba(255,255,255,.15);
+    border-left:4px solid #60A5FA;
+}
 .logo{
     padding:25px;
     font-size:20px;
