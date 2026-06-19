@@ -2939,3 +2939,80 @@ tbody tr:hover{
 #reportsPage::-webkit-scrollbar-thumb{
     background:var(--primary) !important;
 }
+/* ===== COPPER THEME OVERRIDE ===== */
+
+/* Settings Page */
+.profile-card::before{
+    background:linear-gradient(
+        135deg,
+        #C56A00,
+        #E8891A
+    ) !important;
+}
+
+.profile-avatar{
+    color:#C56A00 !important;
+}
+
+.info-box i{
+    color:#C56A00 !important;
+}
+
+.admin-badge{
+    background:#FFF7ED !important;
+    color:#C56A00 !important;
+}
+
+/* Profile Button */
+.edit-profile-btn{
+    background:linear-gradient(
+        135deg,
+        #C56A00,
+        #E8891A
+    ) !important;
+}
+
+/* Status Badges */
+.status-active{
+    background:#FEF3C7 !important;
+    color:#B45309 !important;
+}
+
+.status-inactive{
+    background:#FEE2E2 !important;
+    color:#DC2626 !important;
+}
+
+/* Maintenance Status */
+.status-maintenance{
+    background:#FFF7ED !important;
+    color:#C56A00 !important;
+}
+
+.status-inprogress{
+    background:#FEF3C7 !important;
+    color:#B45309 !important;
+}
+
+/* Notification Badge */
+#requestBadge{
+    background:#C56A00 !important;
+}
+
+/* Report Icons */
+.report-card i{
+    color:rgba(197,106,0,.15) !important;
+}
+
+/* Asset Icons */
+.laptop-card i{
+    color:#C56A00 !important;
+}
+
+.monitor-card i{
+    color:#D97706 !important;
+}
+
+.printer-card i{
+    color:#B45309 !important;
+}
